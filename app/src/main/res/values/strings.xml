@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Klever</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="titulo">Titulo</string>
+    <string name="descricao">Descrição</string>
+    <string name="salvar">Salvar</string>
+    <string name="nome">Nome</string>
+    <string name="deletar">Deletar</string>
+</resources>
