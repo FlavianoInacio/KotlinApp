@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.klever.adapter.CarroListAdapter
 import com.example.klever.infra.RetrofitClient
+import com.example.klever.infra.Token
 import com.example.klever.models.Carro
 import com.example.klever.services.CarroService
 import kotlinx.android.synthetic.main.activity_carros.*
@@ -18,22 +19,20 @@ import retrofit2.Response
 
 
 class CarrosActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var shared: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
-        shared = this.getSharedPreferences("user", Context.MODE_PRIVATE)
-        val token = shared.getString("token", "")
+        val token = "Bearer ${Token.createToken("")}"
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carros)
         button_add.setOnClickListener(this)
         val remote = RetrofitClient.createService(CarroService::class.java)
-        val call: Call<List<Carro>> = remote.list("Bearer " + token)
+        val call: Call<List<Carro>> = remote.list(token)
         serviceCarroList(call)
     }
 
     private fun serviceCarroList(call: Call<List<Carro>>) {
         call.enqueue(object : Callback<List<Carro>> {
             override fun onFailure(call: Call<List<Carro>>, t: Throwable) {
-                TODO("Not yet implemented")
+                print(t.message)
             }
 
             override fun onResponse(call: Call<List<Carro>>, response: Response<List<Carro>>) {

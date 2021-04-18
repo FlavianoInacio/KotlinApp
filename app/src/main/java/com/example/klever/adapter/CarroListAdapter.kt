@@ -21,18 +21,15 @@ class CarroListAdapter(private val carros: List<Carro>, private val context: Con
     Adapter<CarroListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imageView: ImageView
-        var title: TextView
-        var description: TextView
+        val imageView = itemView.item_image
+        val title = itemView.note_item_title
+        val description = itemView.note_item_description
 
         init {
-            title = itemView.note_item_title
-            description = itemView.note_item_description
-            imageView = itemView.item_image
             itemView.setOnClickListener { v: View ->
-                var position: Int = getAdapterPosition()
+                val position = adapterPosition
                 val intent = Intent(context, CarroFormActivity::class.java)
-                val carro: Carro = carros.get(position)
+                val carro: Carro = carros[position]
                 intent.putExtra("carro", carro)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent)
