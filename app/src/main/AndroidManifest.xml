@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Klever"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CarroFormActivity"></activity>
-        <activity android:name=".CarrosActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".scenes.carros.CarroFormActivity"></activity>
+        <activity android:name=".scenes.carros.CarrosActivity" />
+        <activity android:name=".scenes.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -5,13 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.klever.CarroFormActivity
+import com.example.klever.scenes.carros.CarroFormActivity
 import com.example.klever.R
 import com.example.klever.models.Carro
 import kotlinx.android.synthetic.main.carro_item.view.*
