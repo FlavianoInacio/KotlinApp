@@ -1,8 +1,7 @@
 package com.example.klever.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.klever.infra.ResultadoLogin
+import com.example.klever.infra.ProcessResult
 import com.example.klever.infra.RetrofitClient
 import com.example.klever.infra.Token
 import com.example.klever.models.Login
@@ -14,23 +13,23 @@ import retrofit2.Response
 
 class LoginRepository {
 
-    fun login(userLogin: UserLogin): MutableLiveData<ResultadoLogin> {
-        val liveData = MutableLiveData<ResultadoLogin>()
+    fun login(userLogin: UserLogin): MutableLiveData<ProcessResult> {
+        val liveData = MutableLiveData<ProcessResult>()
         val remote = RetrofitClient.createService(LoginService::class.java)
         val call: Call<Login> = remote.login(userLogin)
         call.enqueue(object : Callback<Login> {
             override fun onFailure(call: Call<Login>, t: Throwable) {
                 println(t.message)
-                liveData.postValue(ResultadoLogin.ERROR)
+                liveData.postValue(ProcessResult.ERROR)
             }
             override fun onResponse(call: Call<Login>, res: Response<Login>) {
                 val login = res.body()
                 if (login != null) {
                     login?.token?.let { Token.createToken(it) }
-                    liveData.postValue(ResultadoLogin.SUCESSO)
+                    liveData.postValue(ProcessResult.SUCESSO)
                 }
                 else{
-                    liveData.postValue(ResultadoLogin.ERROR)
+                    liveData.postValue(ProcessResult.ERROR)
                 }
 
             }

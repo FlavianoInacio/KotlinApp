@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.klever.R
 import com.example.klever.base.BaseActivity
 import com.example.klever.databinding.ActivityCarroFormBinding
+import com.example.klever.infra.ProcessResult
 import com.example.klever.models.Carro
 import kotlinx.android.synthetic.main.activity_carro_form.*
 
@@ -23,12 +24,6 @@ class CarroFormActivity : BaseActivity<ActivityCarroFormBinding>(ActivityCarroFo
         popularValorEdit()
         buttonSalvar.setOnClickListener(this)
         buttonDeletar.setOnClickListener(this)
-        viewModel.carro.observe(this, Observer {
-            criarDialog("Carro Salvo com Sucesso!")
-        })
-        viewModel.delete.observe(this, Observer {
-            criarDialog("Carro Deletado com Sucesso!")
-        })
     }
     private fun popularValorEdit() {
         if (carro != null) {
@@ -41,11 +36,29 @@ class CarroFormActivity : BaseActivity<ActivityCarroFormBinding>(ActivityCarroFo
     }
     override fun onClick(v: View?) {
         if (v?.id == R.id.buttonDeletar) {
-            viewModel.delete(carro?.id)
+            viewModel.delete(carro?.id).observe(this, Observer {
+                when (it){
+                    ProcessResult.SUCESSO->{
+                        criarDialog("Carro Deletado com Sucesso!")
+                    }
+                    ProcessResult.ERROR->{
+                        criarDialog("Algo deu Errado!")
+                    }
+                }
+            })
         } else {
             val nome = nome_carro.text.toString()
             val descricao = descricao_carro.text.toString()
-            viewModel.save(nome,descricao,carro?.id)
+            viewModel.save(nome,descricao,carro?.id).observe(this, Observer {
+                when (it){
+                    ProcessResult.SUCESSO->{
+                        criarDialog("Carro Salvo com Sucesso!")
+                    }
+                    ProcessResult.ERROR->{
+                        criarDialog("Algo deu Errado!")
+                    }
+                }
+            })
         }
     }
     private fun criarDialog(mensagem: String) {

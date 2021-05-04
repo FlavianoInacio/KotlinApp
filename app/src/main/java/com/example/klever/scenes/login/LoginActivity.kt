@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.klever.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import com.example.klever.databinding.ActivityLoginBinding
-import com.example.klever.infra.ResultadoLogin
+import com.example.klever.infra.ProcessResult
 import com.example.klever.scenes.carros.CarrosActivity
 
 
@@ -25,11 +25,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         val password = senha.text.toString();
         viewModel.login(user,password).observe(this, Observer {
             when(it){
-                ResultadoLogin.SUCESSO->{
+                ProcessResult.SUCESSO->{
                     val intent = Intent(this,CarrosActivity::class.java)
                     startActivity(intent)
                 }
-                ResultadoLogin.ERROR->{
+                ProcessResult.ERROR->{
                     Toast.makeText(applicationContext,"Erro na tentativa de Login", Toast.LENGTH_LONG).show()
                 }
             }

@@ -1,5 +1,5 @@
 package com.example.klever.infra
 
-enum class ResultadoLogin {
+enum class ProcessResult {
     SUCESSO,ERROR
 }

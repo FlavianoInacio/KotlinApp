@@ -18,13 +18,12 @@ class CarrosActivity : BaseActivity<ActivityCarrosBinding>(ActivityCarrosBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CarrosViewModel::class.java)
-        viewModel.carros.observe(this, Observer {
-            listCarros(it)
-        })
         button_add.setOnClickListener(this)
-        viewModel.listCarros()
+        viewModel.listCarros().observe(this, Observer {
+            inflateAdapter(it)
+        })
     }
-    private fun listCarros(carros: List<Carro>?) {
+    private fun inflateAdapter(carros: List<Carro>?) {
         val recyclerView = note_list_recyclerview
         recyclerView.adapter = carros?.let { CarroListAdapter(it, this) }
         val layoutManager =
