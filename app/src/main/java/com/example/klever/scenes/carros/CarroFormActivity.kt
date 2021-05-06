@@ -1,13 +1,10 @@
 package com.example.klever.scenes.carros
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.klever.R
 import com.example.klever.base.BaseActivity
 import com.example.klever.databinding.ActivityCarroFormBinding
 import com.example.klever.infra.ProcessResult
@@ -39,7 +36,7 @@ class CarroFormActivity : BaseActivity<ActivityCarroFormBinding>(ActivityCarroFo
         val descricao = descricao_carro.text.toString()
         viewModel.save(nome, descricao, carro?.id).observe(this, Observer {
             when (it) {
-                ProcessResult.SUCESSO -> {
+                ProcessResult.SUCESS -> {
                     super.onBackPressed();
                 }
                 ProcessResult.ERROR -> {

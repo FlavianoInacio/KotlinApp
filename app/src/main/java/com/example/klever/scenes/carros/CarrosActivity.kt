@@ -6,14 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.klever.adapter.CarroListAdapter
 import com.example.klever.base.BaseActivity
 import com.example.klever.databinding.ActivityCarrosBinding
 import com.example.klever.infra.ProcessResult
 import com.example.klever.models.Carro
-import com.example.klever.scenes.listener.CarroListener
+import com.example.klever.listener.CarroListener
 import kotlinx.android.synthetic.main.activity_carros.*
 
 
@@ -32,7 +31,7 @@ class CarrosActivity : BaseActivity<ActivityCarrosBinding>(ActivityCarrosBinding
             override fun onDelete(id: Long) {
                 mViewModel.delete(id).observe(this@CarrosActivity, Observer {
                     when (it) {
-                        ProcessResult.SUCESSO -> {
+                        ProcessResult.SUCESS -> {
                             onResume()
                         }
                         ProcessResult.ERROR -> {

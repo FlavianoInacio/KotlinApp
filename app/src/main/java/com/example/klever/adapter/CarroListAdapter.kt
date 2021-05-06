@@ -13,7 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.klever.scenes.carros.CarroFormActivity
 import com.example.klever.R
 import com.example.klever.models.Carro
-import com.example.klever.scenes.listener.CarroListener
+import com.example.klever.listener.CarroListener
 import kotlinx.android.synthetic.main.carro_item.view.*
 
 

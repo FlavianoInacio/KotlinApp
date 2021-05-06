@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         val password = senha.text.toString();
         viewModel.login(user,password).observe(this, Observer {
             when(it){
-                ProcessResult.SUCESSO->{
+                ProcessResult.SUCESS->{
                     val intent = Intent(this,CarrosActivity::class.java)
                     startActivity(intent)
                 }
